@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>វិចនានុក្រម | បណ្ណាល័យ សុវណ្ណ - Sovann Library</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans Khmer', 'Noto Sans JP', sans-serif; }
+    .jp { font-family: 'Noto Sans JP', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #f43f5e 100%); }
+    .filter-btn.active { background: linear-gradient(135deg, #7c3aed, #db2777); color: white; }
+    .card-hover:hover { background: #faf5ff; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 min-h-screen text-gray-800">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-purple-100">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.jpg" alt="Sovann Library Logo" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-purple-100">
+        <div>
+          <div class="font-bold text-blue-900 text-base leading-tight">បណ្ណាល័យ សុវណ្ណ</div>
+          <div class="text-xs text-gray-500">Sovann Library · 日本語学習センター</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="index.html" class="hover:text-purple-600 pb-1">ទំព័រដើម</a>
+        <a href="dictionary.html" class="text-purple-600 border-b-2 border-purple-500 pb-1 font-semibold">វិចនានុក្រម</a>
+        <a href="#" class="hover:text-purple-600 pb-1">បណ្ណាល័យសៀវភៅ</a>
+        <a href="#" class="hover:text-purple-600 pb-1">ប្រលង JLPT</a>
+        <a href="#" class="hover:text-purple-600 pb-1">Sovan AI</a>
+      </nav>
+      <button class="gradient-bg text-white px-4 py-1.5 rounded-full text-sm font-medium shadow">+ បង់ថ្លៃ</button>
+    </div>
+  </header>
+
+  <!-- Page Title -->
+  <section class="gradient-bg text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">វិចនានុក្រម ជប៉ុន-ខ្មែរ</h1>
+      <p class="text-lg opacity-95 jp">日本語・クメール語 辞書</p>
+      <p class="text-sm opacity-85 mt-1">ពាក្យជាង ៣,៣០០+ · Hiragana · Katakana · បកប្រែខ្មែរ</p>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+
+    <!-- Search + Filter -->
+    <div class="bg-white rounded-2xl shadow-lg p-5 mb-6 border border-purple-100">
+      <div class="flex flex-col lg:flex-row gap-4">
+        <div class="flex-1 relative">
+          <input id="searchInput" type="text" 
+            placeholder="ស្វែងរកពាក្យ... (Hiragana / Katakana / ភាសាខ្មែរ)"
+            class="w-full pl-11 pr-4 py-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm md:text-base">
+          <svg class="w-5 h-5 absolute left-3.5 top-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="setFilter('all')" class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-purple-100 text-purple-700">ទាំងអស់</button>
+          <button onclick="setFilter('verb')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700">កិរិយាសព្ទ</button>
+          <button onclick="setFilter('i-adj')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700">គុណនាម い</button>
+          <button onclick="setFilter('na-adj')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700">គុណនាម な</button>
+          <button onclick="setFilter('noun')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700">នាម</button>
+          <button onclick="setFilter('adv')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700">ពាក្យបញ្ជាក់</button>
+        </div>
+      </div>
+      <div class="mt-3 text-sm text-gray-600">
+        បង្ហាញ: <strong id="shownCount" class="text-purple-700">0</strong> ពាក្យ
+        <span class="mx-2">·</span>
+        សរុបក្នុងទិន្នន័យ: <strong>៣,៣០០+</strong> ពាក្យ
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-purple-100">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="gradient-bg text-white text-sm">
+              <th class="px-4 py-3.5 font-semibold w-14">ល.រ</th>
+              <th class="px-4 py-3.5 font-semibold">ហ៊ីរ៉ាហ្កាណា</th>
+              <th class="px-4 py-3.5 font-semibold">កាតាកាណា</th>
+              <th class="px-4 py-3.5 font-semibold">បកប្រែជាភាសាខ្មែរ</th>
+              <th class="px-4 py-3.5 font-semibold">ក្រុមពាក្យ</th>
+            </tr>
+          </thead>
+          <tbody id="dictBody" class="divide-y divide-purple-50"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="hidden py-16 text-center">
+        <div class="text-5xl mb-3">🔍</div>
+        <p class="text-gray-500 text-lg">រកមិនឃើញពាក្យ</p>
+      </div>
+    </div>
+
+    <div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+      <strong>កំណត់សម្គាល់៖</strong> ទំព័រនេះបង្ហាញពាក្យគំរូប្រហែល ១៨០ ពាក្យ។ ឯកសារដើមមានជាង ៣,៣០០ ពាក្យ។ អ្នកអាចស្នើឱ្យបន្ថែមពាក្យបន្ថែមទៀតបាន។
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 bg-white border-t border-purple-100 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <div class="font-bold text-blue-900">បណ្ណាល័យ សុវណ្ណ · Sovann Library</div>
+      <div class="text-sm text-gray-500 jp mb-2">日本語学習センター</div>
+      <div class="flex justify-center gap-6 text-sm text-gray-600 mb-3">
+        <a href="index.html" class="hover:text-purple-600">ទំព័រដើម</a>
+        <a href="dictionary.html" class="hover:text-purple-600">វិចនានុក្រម</a>
+      </div>
+      <p class="text-xs text-gray-400">© 2026 Sovann Library</p>
+    </div>
+  </footer>
+
+  <script>
+    const vocabulary = [
+      {id:1,hira:"あずかります (預かります)",kata:"アズカリマス",khmer:"ទទួលផ្ញើ / រក្សាទុកឲ្យ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:2,hira:"あずけます (預けます)",kata:"アズケマス",khmer:"ផ្ញើទុក (ឥវ៉ាន់/លុយ)",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:3,hira:"あたります (当たります)",kata:"アタリマス",khmer:"ត្រូវ (ឆ្នោត/រង្វាន់)",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:4,hira:"いいわけします (言い訳します)",kata:"イイワケシマス",khmer:"ដោះសា / រកលេស",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ៣"},
+      {id:5,hira:"いじめます",kata:"イジメマス",khmer:"ធ្វើបាប / គំរាមកំហែង",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:6,hira:"いただきます (頂きます)",kata:"イタダキマス",khmer:"ទទួល (ពាក្យបន្ទាបខ្លួន)",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:7,hira:"いわいます (祝います)",kata:"イワイマス",khmer:"អបអរសាទរ / ជូនពរ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:8,hira:"うえます (植えます)",kata:"ウエマス",khmer:"ដាំ (ដើមឈើ/ផ្កា)",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:9,hira:"うけます (受けます)",kata:"ウケマス",khmer:"ទទួល / ចូលប្រឡង",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:10,hira:"うつします (写します)",kata:"ウツシマス",khmer:"ចម្លង / ថតចម្លង",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:11,hira:"うつります (移ります)",kata:"ウツリマス",khmer:"ផ្លាស់ប្តូរទីតាំង / ឆ្លង",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:12,hira:"おこします (起こします)",kata:"オコシマス",khmer:"ដាស់ (ឲ្យភ្ញាក់)",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:13,hira:"おこないます (行います)",kata:"オコナイマス",khmer:"ប្រព្រឹត្ត / រៀបចំធ្វើ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:14,hira:"おどろかします (驚かします)",kata:"オドロカシマス",khmer:"ធ្វើឲ្យភ្ញាក់ផ្អើល",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:15,hira:"おります (下ります)",kata:"オリマス",khmer:"ចុះ (ពីភ្នំ/ជណ្តើរ)",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:16,hira:"かざります (飾ります)",kata:"カザリマス",khmer:"តុបតែង / លម្អ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:17,hira:"かぞえます (数えます)",kata:"カゾエマス",khmer:"រាប់ (ចំនួន)",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:18,hira:"かわかします (乾かします)",kata:"カワカシマス",khmer:"សម្ងួត / ហាលឲ្យស្ងួត",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:19,hira:"かわきます (乾きます)",kata:"カワキマス",khmer:"ស្ងួត",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:20,hira:"かわります (代わります)",kata:"カワリマス",khmer:"ជំនួស",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:21,hira:"さがします (探します)",kata:"サガシマス",khmer:"ស្វែងរក / រកមើល",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:22,hira:"さします (指します)",kata:"サシマス",khmer:"ចង្អុល",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:23,hira:"さそいます (誘います)",kata:"サソイマス",khmer:"បបួល / អញ្ជើញ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:24,hira:"さわぎます (騒ぎます)",kata:"サワギマス",khmer:"ឡូឡា / រំខាន",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:25,hira:"しらせます (知らせます)",kata:"シラセマス",khmer:"ជូនដំណឹង",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:26,hira:"しんじます (信じます)",kata:"シンジマス",khmer:"ជឿជាក់ / ទុកចិត្ត",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:27,hira:"すきます (空きます)",kata:"スキマス",khmer:"ទំនេរ / ស្ងាត់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:28,hira:"すべります (滑ります)",kata:"スベリマス",khmer:"រអិល",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:29,hira:"そだてます (育てます)",kata:"ソダテマス",khmer:"ចិញ្ចឹមបីបាច់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:30,hira:"たおれます (倒れます)",kata:"タオレマス",khmer:"ដួល / រលំ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:31,hira:"たしかめます (確かめます)",kata:"タシカメマス",khmer:"បញ្ជាក់ឲ្យច្បាស់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:32,hira:"たすけます (助けます)",kata:"タスケマス",khmer:"ជួយសង្គ្រោះ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:33,hira:"たずねます (尋ねます)",kata:"タズネマス",khmer:"សួរនាំ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:34,hira:"たてます (立てます)",kata:"タテマス",khmer:"បញ្ឈរ / លើកឡើង",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:35,hira:"たのしみます (楽しみます)",kata:"タノシミマス",khmer:"រីករាយ / កម្សាន្ត",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:36,hira:"たのみます (頼みます)",kata:"タノミマス",khmer:"ស្នើសុំ / ពឹងពាក់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:37,hira:"たりる (足ります)",kata:"タリマス",khmer:"គ្រប់គ្រាន់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:38,hira:"つかまえます (捕まえます)",kata:"ツカマエマス",khmer:"ចាប់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:39,hira:"つたえます (伝えます)",kata:"ツタエマス",khmer:"ផ្ទេរព័ត៌មាន",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:40,hira:"とおります (通ります)",kata:"トオリマス",khmer:"ឆ្លងកាត់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:41,hira:"なきます (鳴きます)",kata:"ナキマス",khmer:"យំ / ស្រែក",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:42,hira:"なげます (投げます)",kata:"ナゲマス",khmer:"បោះ / គប់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:43,hira:"なれます (慣れます)",kata:"ナレマス",khmer:"ស៊ាំ / ធ្លាប់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:44,hira:"にげます (逃げます)",kata:"ニゲマス",khmer:"រត់គេចខ្លួន",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:45,hira:"ぬすみます (盗みます)",kata:"ヌスミマス",khmer:"លួច",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:46,hira:"ぬれます (濡れます)",kata:"ヌレマス",khmer:"ទទឹក",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:47,hira:"ねむります (眠ります)",kata:"ネムリマス",khmer:"ដេកលក់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:48,hira:"のこります (残ります)",kata:"ノコリマス",khmer:"នៅសល់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:49,hira:"はこびます (運びます)",kata:"ハコビマス",khmer:"ដឹកជញ្ជូន",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:50,hira:"はじまります (始まります)",kata:"ハジマリマス",khmer:"ចាប់ផ្តើម",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:51,hira:"ひっこします (引っ越します)",kata:"ヒッコシマス",khmer:"រើផ្ទះ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:52,hira:"まにあいます (間に合います)",kata:"マニアイマス",khmer:"ទាន់ពេល",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:53,hira:"まもります (守ります)",kata:"マモリマス",khmer:"ការពារ / គោរពតាម",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:54,hira:"みつけます (見つけます)",kata:"ミツケマス",khmer:"រកឃើញ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:55,hira:"めしあがります (召し上がります)",kata:"メシアガリマス",khmer:"ញ៉ាំ (ពាក្យគួរសម)",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:56,hira:"わたします (渡します)",kata:"ワタシマス",khmer:"ប្រគល់ឲ្យ / ហុចឲ្យ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:57,hira:"うつくしい (美しい)",kata:"ウツクシイ",khmer:"ស្រស់ស្អាត",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:58,hira:"うらやましい (羨ましい)",kata:"ウラヤマシイ",khmer:"គួរឲ្យច្រណែន",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:59,hira:"おかしい",kata:"オカシイ",khmer:"កំប្លែង / ចម្លែក",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:60,hira:"おとなしい",kata:"オトナシイ",khmer:"ស្លូតបូត",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:61,hira:"かたい (固い)",kata:"カタイ",khmer:"រឹង / តឹងរ៉ឹង",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:62,hira:"かわいい (可愛い)",kata:"カワイイ",khmer:"គួរឲ្យស្រឡាញ់",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:63,hira:"きびしい (厳しい)",kata:"キビシイ",khmer:"តឹងរ៉ឹង / ម៉ឺងម៉ាត់",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:64,hira:"すばらしい (素晴らしい)",kata:"スバラシイ",khmer:"អស្ចារ្យ",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:65,hira:"ただしい (正しい)",kata:"タダシイ",khmer:"ត្រឹមត្រូវ",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:66,hira:"はずかしい (恥ずかしい)",kata:"ハズカシイ",khmer:"អៀនខ្មាស",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:67,hira:"ひどい",kata:"ヒドイ",khmer:"អាក្រក់ខ្លាំង",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:68,hira:"めずらしい (珍しい)",kata:"メズラシイ",khmer:"កម្រ / ប្លែក",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:69,hira:"やわらかい (柔らかい)",kata:"ヤワラカイ",khmer:"ទន់",type:"i-adj",typeLabel:"គុណនាម い"},
+      {id:70,hira:"かんたん (簡単)",kata:"カンタン",khmer:"ងាយស្រួល",type:"na-adj",typeLabel:"គុណនាម な"},
+      {id:71,hira:"ざんねん (残念)",kata:"ザンネン",khmer:"សោកស្តាយ",type:"na-adj",typeLabel:"គុណនាម な"},
+      {id:72,hira:"ていねい (丁寧)",kata:"テイネイ",khmer:"គួរសម",type:"na-adj",typeLabel:"គុណនាម な"},
+      {id:73,hira:"とくべつ (特別)",kata:"トクベツ",khmer:"ពិសេស",type:"na-adj",typeLabel:"គុណនាម な"},
+      {id:74,hira:"まじめ (真面目)",kata:"マジメ",khmer:"ម៉ឺងម៉ាត់ / ស្មោះត្រង់",type:"na-adj",typeLabel:"គុណនាម な"},
+      {id:75,hira:"りっぱ (立派)",kata:"リッパ",khmer:"អស្ចារ្យ / ថ្លៃថ្នូរ",type:"na-adj",typeLabel:"គុណនាម な"},
+      {id:76,hira:"しっかり",kata:"シッカリ",khmer:"រឹងមាំ / ច្បាស់លាស់",type:"adv",typeLabel:"ពាក្យបញ្ជាក់"},
+      {id:77,hira:"はっきり",kata:"ハッキリ",khmer:"ច្បាស់លាស់",type:"adv",typeLabel:"ពាក្យបញ្ជាក់"},
+      {id:78,hira:"いっしょうけんめい (一生懸命)",kata:"イッショウケンメイ",khmer:"ប្រឹងប្រែងខ្លាំង",type:"adv",typeLabel:"ពាក្យបញ្ជាក់"},
+      {id:79,hira:"あいさつ (挨拶)",kata:"アイサツ",khmer:"ការសួរសុខទុក្ខ",type:"noun",typeLabel:"នាម"},
+      {id:80,hira:"あじ (味)",kata:"アジ",khmer:"រសជាតិ",type:"noun",typeLabel:"នាម"},
+      {id:81,hira:"あんない (案内)",kata:"アンナイ",khmer:"ការណែនាំផ្លូវ",type:"noun",typeLabel:"នាម"},
+      {id:82,hira:"いけん (意見)",kata:"イケン",khmer:"មតិយោបល់",type:"noun",typeLabel:"នាម"},
+      {id:83,hira:"いみ (意味)",kata:"イミ",khmer:"អត្ថន័យ",type:"noun",typeLabel:"នាម"},
+      {id:84,hira:"うで (腕)",kata:"ウデ",khmer:"ដៃ / សមត្ថភាព",type:"noun",typeLabel:"នាម"},
+      {id:85,hira:"おくりもの (贈り物)",kata:"オクリモノ",khmer:"អំណោយ",type:"noun",typeLabel:"នាម"},
+      {id:86,hira:"おと (音)",kata:"オト",khmer:"សំឡេង",type:"noun",typeLabel:"នាម"},
+      {id:87,hira:"かいがん (海岸)",kata:"カイガン",khmer:"ឆ្នេរសមុទ្រ",type:"noun",typeLabel:"នាម"},
+      {id:88,hira:"かたち (形)",kata:"カタチ",khmer:"រូបរាង",type:"noun",typeLabel:"នាម"},
+      {id:89,hira:"かちょう (課長)",kata:"カチョウ",khmer:"ប្រធានការិយាល័យ",type:"noun",typeLabel:"នាម"},
+      {id:90,hira:"しらべる (調べる)",kata:"シラベル",khmer:"ស្រាវជ្រាវ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:91,hira:"しる (知る)",kata:"シル",khmer:"ដឹង / ស្គាល់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:92,hira:"しんぱいする (心配する)",kata:"シンパイスル",khmer:"បារម្ភ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ៣"},
+      {id:93,hira:"すてる (捨てる)",kata:"ステル",khmer:"បោះចោល",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:94,hira:"すむ (住む)",kata:"スム",khmer:"រស់នៅ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:95,hira:"たのしむ (楽しむ)",kata:"タノシム",khmer:"រីករាយ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:96,hira:"つかれる (疲れる)",kata:"ツカレル",khmer:"ហត់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:97,hira:"つくる (作る)",kata:"ツクル",khmer:"ធ្វើ / បង្កើត",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:98,hira:"できる (出来る)",kata:"デキル",khmer:"អាចធ្វើបាន",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:99,hira:"ならう (習う)",kata:"ナラウ",khmer:"រៀន",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:100,hira:"のむ (飲む)",kata:"ノム",khmer:"ផឹក",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:101,hira:"はたらく (働く)",kata:"ハタラク",khmer:"ធ្វើការ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:102,hira:"はなす (話す)",kata:"ハナス",khmer:"និយាយ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:103,hira:"まつ (待つ)",kata:"マツ",khmer:"រង់ចាំ",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"},
+      {id:104,hira:"ねる (寝る)",kata:"ネル",khmer:"ដេក",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ២"},
+      {id:105,hira:"はしる (走る)",kata:"ハシル",khmer:"រត់",type:"verb",typeLabel:"កិរិយាសព្ទ ក្រុមទី ១"}
+    ];
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function setFilter(type) {
+      currentFilter = type;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.classList.add('bg-gray-100', 'text-gray-700');
+      });
+      event.target.classList.add('active');
+      event.target.classList.remove('bg-gray-100', 'text-gray-700');
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('dictBody');
+      const emptyState = document.getElementById('emptyState');
+      const shownCount = document.getElementById('shownCount');
+
+      let filtered = vocabulary.filter(word => {
+        const matchFilter = currentFilter === 'all' || word.type === currentFilter;
+        const s = currentSearch.toLowerCase();
+        const matchSearch = !currentSearch || 
+          word.hira.toLowerCase().includes(s) ||
+          word.kata.toLowerCase().includes(s) ||
+          word.khmer.includes(currentSearch);
+        return matchFilter && matchSearch;
+      });
+
+      shownCount.textContent = filtered.length;
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+      tbody.innerHTML = filtered.map(word => `
+        <tr class="card-hover transition">
+          <td class="px-4 py-3 text-sm text-gray-500">${word.id}</td>
+          <td class="px-4 py-3"><span class="jp font-medium">${word.hira}</span></td>
+          <td class="px-4 py-3"><span class="jp text-purple-700 font-medium">${word.kata}</span></td>
+          <td class="px-4 py-3">${word.khmer}</td>
+          <td class="px-4 py-3">
+            <span class="inline-block px-2.5 py-1 rounded-full text-xs font-medium
+              ${word.type==='verb'?'bg-blue-100 text-blue-700':
+                word.type==='i-adj'?'bg-pink-100 text-pink-700':
+                word.type==='na-adj'?'bg-purple-100 text-purple-700':
+                word.type==='adv'?'bg-amber-100 text-amber-700':
+                'bg-green-100 text-green-700'}">
+              ${word.typeLabel}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+      currentSearch = e.target.value.trim();
+      renderTable();
+    });
+
+    renderTable();
+  </script>
+</body>
+</html>

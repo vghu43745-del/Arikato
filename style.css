@@ -1,0 +1,242 @@
+/* ========================================
+   បណ្ណាល័យ សុវណ្ណ - Sovann Library
+   ឧទាហរណ៍កូដ CSS (អ្នកអាចកែបាន)
+   ======================================== */
+
+/* ---------- ១. ពណ៌មូលដ្ឋាន (Colors) ---------- */
+:root {
+  --primary: #7c3aed;      /* ពណ៌ស្វាយចម្បង */
+  --secondary: #db2777;    /* ពណ៌ផ្កាឈូក */
+  --accent: #f43f5e;       /* ពណ៌ក្រហមផ្កាឈូក */
+  --text-dark: #1e293b;    /* អក្សរខ្មៅ */
+  --text-gray: #64748b;    /* អក្សរប្រផេះ */
+  --bg-light: #fdf2f8;     /* ផ្ទៃខាងក្រោយស្រាល */
+}
+
+/* ---------- ២. ប្រើ Font ខ្មែរ + ជប៉ុន ---------- */
+body {
+  font-family: 'Noto Sans Khmer', 'Noto Sans JP', sans-serif;
+  background: linear-gradient(135deg, #fdf2f8 0%, #f3e8ff 50%, #e0e7ff 100%);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}
+
+/* Font សម្រាប់អក្សរជប៉ុន */
+.jp-text {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ---------- ៣. Header (ផ្នែកខាងលើ) ---------- */
+header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e9d5ff;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Logo */
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e9d5ff;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.15);
+}
+
+/* ---------- ៤. ប៊ូតុង (Buttons) ---------- */
+
+/* ប៊ូតុងចម្បង */
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #db2777);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+  opacity: 0.95;
+}
+
+/* ប៊ូតុងបន្ទាប់បន្សំ */
+.btn-secondary {
+  background: white;
+  color: #7c3aed;
+  border: 2px solid #7c3aed;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-secondary:hover {
+  background: #7c3aed;
+  color: white;
+}
+
+/* ---------- ៥. Card (ប្រអប់) ---------- */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+  border: 1px solid #f3e8ff;
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(124, 58, 237, 0.15);
+}
+
+/* ---------- ៦. Hero Section (ផ្នែកធំខាងលើ) ---------- */
+.hero {
+  background: linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #f43f5e 100%);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* ---------- ៧. តារាងវិចនានុក្រម ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: linear-gradient(135deg, #7c3aed, #db2777);
+  color: white;
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3e8ff;
+}
+
+tr:hover {
+  background: #faf5ff;
+}
+
+/* Badge ប្រភេទពាក្យ */
+.badge-verb {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-adj {
+  background: #fce7f3;
+  color: #be185d;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-noun {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---------- ៨. Search Box ---------- */
+.search-box {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1px solid #e9d5ff;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-box:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+}
+
+/* ---------- ៩. Filter Buttons ---------- */
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: linear-gradient(135deg, #7c3aed, #db2777);
+  color: white;
+}
+
+/* ---------- ១០. Responsive (សម្រាប់ទូរស័ព្ទ) ---------- */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .nav-desktop {
+    display: none;
+  }
+  
+  th, td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- ១១. ឧទាហរណ៍កែពណ៌ងាយៗ ---------- */
+
+/* បើចង់ប្តូរពណ៌ចម្បងទៅខៀវ៖ */
+/*
+:root {
+  --primary: #2563eb;
+  --secondary: #3b82f6;
+}
+*/
+
+/* បើចង់ធ្វើ Card ឱ្យមូលជាង៖ */
+/*
+.card {
+  border-radius: 24px;
+}
+*/
+
+/* បើចង់ប្តូរពណ៌ Header៖ */
+/*
+header {
+  background: #7c3aed;
+  color: white;
+}
+*/
